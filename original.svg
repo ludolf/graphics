@@ -10,10 +10,10 @@
    version="1.1"
    viewBox="0 0 322.44599 372.89762"
    stroke-miterlimit="10"
-   id="svg127"
+   id="ludolf"
    sodipodi:docname="original.svg"
-   width="322.44598"
-   height="372.89761"
+   width="322"
+   height="372"
    style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
    inkscape:version="0.92.3 (2405546, 2018-03-11)">
   <metadata
@@ -42,9 +42,9 @@
      inkscape:window-height="1018"
      id="namedview129"
      showgrid="false"
-     inkscape:zoom="3.227416"
-     inkscape:cx="142.24391"
-     inkscape:cy="135.8833"
+     inkscape:zoom="2.2821278"
+     inkscape:cx="161.22299"
+     inkscape:cy="186.44881"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -58,7 +58,7 @@
        style="clip-rule:nonzero" />
   </clipPath>
   <g
-     id="g196">
+     id="robot">
     <g
        transform="translate(-7.735126,-7.15748)"
        id="g125"
@@ -121,7 +121,7 @@
            style="fill-rule:evenodd;stroke:#434343;stroke-width:8;stroke-linecap:butt;stroke-linejoin:round" />
         <path
            d="m 152.9581,23.15748 v 0 c 0,-8.836555 7.16345,-16 16,-16 v 0 c 4.24347,0 8.31313,1.68571 11.3137,4.686292 3.0006,3.000581 4.6863,7.070245 4.6863,11.313708 v 0 c 0,8.836555 -7.16344,16.000002 -16,16.000002 v 0 c -8.83655,0 -16,-7.163447 -16,-16.000002 z"
-           id="path43"
+           id="light"
            inkscape:connector-curvature="0"
            style="fill:#434343;fill-rule:evenodd" />
       </g>

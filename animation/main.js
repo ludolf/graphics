@@ -1,0 +1,143 @@
+const black = '#434343';
+const blink = '#00ff00';
+
+function rightHandUp() {
+  TweenMax.to('#ludolf_arm_right', 1, {scaleY:-1, y:50});
+  TweenMax.to('#ludolf_hand_right', 1, {y:-200});
+}
+
+function rightHandDown() {
+  TweenMax.to('#ludolf_arm_right', 1, {scaleY:1, y:0});
+  TweenMax.to('#ludolf_hand_right', 1, {y:0});
+}
+
+function leftHandUp() {
+  TweenMax.to('#ludolf_arm_left', 1, {scaleY:-1, y:50});
+  TweenMax.to('#ludolf_hand_left', 1, {y:-200});
+}
+
+function leftHandDown() {
+  TweenMax.to('#ludolf_arm_left', 1, {scaleY:1, y:0});
+  TweenMax.to('#ludolf_hand_left', 1, {y:0});
+}
+
+function rightLegUp() {
+  TweenMax.to('#ludolf_leg_right', 1, {y:-15});  
+}
+
+function rightLegDown() {
+  TweenMax.to('#ludolf_leg_right', 1, {y:0});  
+}
+
+function leftLegUp() {
+  TweenMax.to('#ludolf_leg_left', 1, {y:-15});  
+}
+
+function leftLegDown() {
+  TweenMax.to('#ludolf_leg_left', 1, {y:0});  
+}
+
+function live() {
+  var init = true;
+  var shift = 0;
+  
+  (function body() {
+    if (!init) {      
+      new TimelineMax()
+        .to('#ludolf_body', 0.2, {y:-2, rotation:1, transformOrigin: '50% 100%'})
+        .to('#ludolf_body', 0.5, {y:-2, rotation:-1, transformOrigin: '50% 100%'});
+    }
+    var next = Math.floor((Math.random() * 1) + 1) * 1000;
+    setTimeout(function(){ body(); }, next);
+  })();
+  
+  (function eyelight() {
+    if (!init) {      
+      new TimelineMax()
+        .to('#ludolf_eyelight_left', 0.2, {rotation:20, transformOrigin: '0 100%'})
+        .to('#ludolf_eyelight_left', 0.3, {rotation:0});              
+      new TimelineMax()
+        .to('#ludolf_eyelight_right', 0.2, {rotation:20, transformOrigin: '0 100%'})
+        .to('#ludolf_eyelight_right', 0.3, {rotation:0});
+    }
+    var next = Math.floor((Math.random() * 5) + 1) * 1000;
+    setTimeout(function(){ eyelight(); }, next);
+  })();
+  
+  (function eyebrow() {
+    if (!init) {
+      var repeat = Math.floor(Math.random() * 2);
+      new TimelineMax({repeat:repeat})
+        .to('#ludolf_eyebrow_right', 0.1, {y:0, x:-5, rotation:10, transformOrigin: '100% 0%'})
+        .to('#ludolf_eyebrow_right', 0.3, {y:0, x:0, rotation:0});
+      new TimelineMax({repeat:repeat})
+        .to('#ludolf_eyebrow_left', 0.1, {y:0, x:5, rotation:-10, transformOrigin: '0% 100%'})
+        .to('#ludolf_eyebrow_left', 0.3, {y:0, x:0, rotation:0});
+    }
+    var next = Math.floor((Math.random() * 10) + 1) * 1000 + shift;
+    shift = next;
+    setTimeout(function(){ eyebrow(); }, next);
+  })();
+  
+  (function nose() {
+    if (!init) {
+      new TimelineMax()
+        .to('#ludolf_nose', 0.2, {y:-5})
+        .to('#ludolf_nose', 0.1, {y:0});
+    }
+    var next = Math.floor((Math.random() * 10) + 1) * 1000 + shift;
+    shift = next;
+    setTimeout(function(){ nose(); }, next);
+  })();      
+    
+  (function bottom() {
+    var color1 = '#ffe599';
+    var color2 = '#ffd399';
+    
+    function changeColor1() {
+      TweenMax.to('#ludolf_bottom3', 0.2, {fill:color1});
+      TweenMax.to('#ludolf_bottom3_line', 0.2, {stroke:color1});
+    }
+    
+    function changeColor2() {
+      TweenMax.to('#ludolf_bottom3', 0.2, {fill:color2});
+      TweenMax.to('#ludolf_bottom3_line', 0.2, {stroke:color2});
+    }
+    
+    if (!init) {      
+      var tl = new TimelineMax()
+        .add(changeColor2, 0.2)
+        .add(changeColor1, 0.5)
+        .add(changeColor2, 0.7)
+        .add(changeColor1, 1.0)
+        .add(changeColor2, 1.2)
+        .add(changeColor1, 2.5)
+        .add(changeColor2, 2.8)
+        .add(changeColor1, 3.0);
+    }
+    var next = Math.floor((Math.random() * 10) + 1) * 1000 + shift;
+    shift = next;
+    setTimeout(function(){ bottom(); }, next);
+  })();
+  
+  init = false;    
+}
+
+var tl_blinking = new TimelineMax({repeat:-1, repeatDelay:0.2, paused:true})
+  .to('#ludolf_light', 0.2, {fill:blink})
+  .to('#ludolf_light', 0.5, {fill:black, delay:0.2});
+
+var tl_dance = new TimelineMax({repeat:-1, repeatDelay:0, paused:true})
+  .add(rightHandUp, 0)
+  .add(rightHandDown, 1)
+  .add(leftHandUp, 1)
+  .add(leftHandDown, 2)
+  .add(rightLegUp, 1)
+  .add(rightLegDown, 2)
+  .add(leftLegUp, 0)
+  .add(leftLegDown, 1);
+
+live();
+
+tl_blinking.resume();
+tl_dance.resume();
