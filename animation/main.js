@@ -67,37 +67,49 @@ function live() {
     
   function buttons() {
     var yellow1 = '#ffe599';
-    var yellow2 = '#efe399';
+    var yellow2 = '#e0c988';
     var red1 = '#cc5858';
     var red2 = '#ac5858';
     
-    function changeColor1() {    
+    function changeColor1a() {    
       TweenMax.to('#ludolf_button_square', 0.5, {fill:red1});
       TweenMax.to('#ludolf_button_square_line', 0.5, {stroke:red1});
+    }
+    
+    function changeColor1b() {    
       TweenMax.to('#ludolf_button_triangle', 0.3, {fill:yellow1});
       TweenMax.to('#ludolf_button_triangle_line', 0.3, {stroke:yellow1});
+    }
+    
+    function changeColor1c() {    
       TweenMax.to('#ludolf_bottom3', 0.2, {fill:yellow1});
       TweenMax.to('#ludolf_bottom3_line', 0.2, {stroke:yellow1});
     }
     
-    function changeColor2() {
+    function changeColor2a() {
       TweenMax.to('#ludolf_button_square', 0.5, {fill:red2});
       TweenMax.to('#ludolf_button_square_line', 0.5, {stroke:red2});
+    }
+    
+    function changeColor2b() {
       TweenMax.to('#ludolf_button_triangle', 0.3, {fill:yellow2});
       TweenMax.to('#ludolf_button_triangle_line', 0.3, {stroke:yellow2});
+    }
+    
+    function changeColor2c() {
       TweenMax.to('#ludolf_bottom3', 0.2, {fill:yellow2});
       TweenMax.to('#ludolf_bottom3_line', 0.2, {stroke:yellow2});
     }
     
-    var tl = new TimelineMax({repeat:-1})
-      .add(changeColor2, 0.5)
-      .add(changeColor1, 1.0)
-      .add(changeColor2, 1.5)
-      .add(changeColor1, 2.0)
-      .add(changeColor2, 2.5)
-      .add(changeColor1, 3.5)
-      .add(changeColor2, 4.0)
-      .add(changeColor1, 4.5);   
+    new TimelineMax({repeat:-1})
+      .add(changeColor2a, 0.2)
+      .add(changeColor1a, 0.4);
+    new TimelineMax({repeat:-1})
+      .add(changeColor2b, 2)
+      .add(changeColor1b, 3);
+    new TimelineMax({repeat:-1})
+      .add(changeColor2c, 1.0)
+      .add(changeColor1c, 1.5);   
   }  
 
   function body() {
@@ -107,7 +119,7 @@ function live() {
       .to('#ludolf_body', 0.5, {y:0, rotation:0});   
   }
   
-  var motions = [body, eyelight, eyebrow, nose];
+  var motions = [body, eyelight, nose, eyebrow, eyebrow];
   
   (function _live() {
       var next = Math.floor(Math.random() * motions.length);
@@ -133,5 +145,5 @@ var tl_dance = new TimelineMax({repeat:-1, repeatDelay:0, paused:true})
 
 live();
 
-tl_blinking.resume();
-tl_dance.resume();
+//tl_blinking.resume();
+//tl_dance.resume();
