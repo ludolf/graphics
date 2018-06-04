@@ -65,37 +65,46 @@ function live() {
       .to('#ludolf_nose', 0.1, {y:0});
   }      
     
-  function bottom() {
-    var color1 = '#ffe599';
-    var color2 = '#efe399';
+  function buttons() {
+    var yellow1 = '#ffe599';
+    var yellow2 = '#efe399';
+    var red1 = '#cc5858';
+    var red2 = '#ac5858';
     
-    function changeColor1() {
-      TweenMax.to('#ludolf_bottom3', 0.2, {fill:color1});
-      TweenMax.to('#ludolf_bottom3_line', 0.2, {stroke:color1});
+    function changeColor1() {    
+      TweenMax.to('#ludolf_button_square', 0.5, {fill:red1});
+      TweenMax.to('#ludolf_button_square_line', 0.5, {stroke:red1});
+      TweenMax.to('#ludolf_button_triangle', 0.3, {fill:yellow1});
+      TweenMax.to('#ludolf_button_triangle_line', 0.3, {stroke:yellow1});
+      TweenMax.to('#ludolf_bottom3', 0.2, {fill:yellow1});
+      TweenMax.to('#ludolf_bottom3_line', 0.2, {stroke:yellow1});
     }
     
     function changeColor2() {
-      TweenMax.to('#ludolf_bottom3', 0.2, {fill:color2});
-      TweenMax.to('#ludolf_bottom3_line', 0.2, {stroke:color2});
+      TweenMax.to('#ludolf_button_square', 0.5, {fill:red2});
+      TweenMax.to('#ludolf_button_square_line', 0.5, {stroke:red2});
+      TweenMax.to('#ludolf_button_triangle', 0.3, {fill:yellow2});
+      TweenMax.to('#ludolf_button_triangle_line', 0.3, {stroke:yellow2});
+      TweenMax.to('#ludolf_bottom3', 0.2, {fill:yellow2});
+      TweenMax.to('#ludolf_bottom3_line', 0.2, {stroke:yellow2});
     }
-    var tl = new TimelineMax()
-      .add(changeColor2, 0.2)
-      .add(changeColor1, 0.5)
-      .add(changeColor2, 0.7)
+    
+    var tl = new TimelineMax({repeat:-1})
+      .add(changeColor2, 0.5)
       .add(changeColor1, 1.0)
-      .add(changeColor2, 1.2)
-      .add(changeColor1, 2.5)
-      .add(changeColor2, 2.8)
-      .add(changeColor1, 3.0);   
+      .add(changeColor2, 1.5)
+      .add(changeColor1, 2.0)
+      .add(changeColor2, 2.5)
+      .add(changeColor1, 3.5)
+      .add(changeColor2, 4.0)
+      .add(changeColor1, 4.5);   
   }  
 
   function body() {
     new TimelineMax()
       .to('#ludolf_body', 0.5, {y:-2, rotation:1, transformOrigin: '50% 100%'})
       .to('#ludolf_body', 0.5, {y:-2, rotation:-1, transformOrigin: '50% 100%'})
-      .to('#ludolf_body', 0.5, {y:0, rotation:0});
-      
-    bottom();    
+      .to('#ludolf_body', 0.5, {y:0, rotation:0});   
   }
   
   var motions = [body, eyelight, eyebrow, nose];
@@ -103,8 +112,9 @@ function live() {
   (function _live() {
       var next = Math.floor(Math.random() * motions.length);
       motions[next]();      
-      setTimeout(_live, Math.floor((Math.random() * 5) + 2) * 1000);
-  })();        
+      setTimeout(_live, Math.floor((Math.random() * 3) + 2) * 1000);
+  })(); 
+  buttons();       
 }
 
 var tl_blinking = new TimelineMax({repeat:-1, repeatDelay:0.2, paused:true})
