@@ -40,16 +40,17 @@ function leftLegDown() {
 function live() {
   
   function eyelight() {
-    new TimelineMax()
+    var repeat = Math.round(Math.random());
+    new TimelineMax({repeat:repeat})
       .to('#ludolf_eyelight_left', 0.2, {rotation:20, transformOrigin: '0 100%'})
       .to('#ludolf_eyelight_left', 0.3, {rotation:0});              
-    new TimelineMax()
+    new TimelineMax({repeat:repeat})
       .to('#ludolf_eyelight_right', 0.2, {rotation:20, transformOrigin: '0 100%'})
       .to('#ludolf_eyelight_right', 0.3, {rotation:0});
   }
   
   function eyebrow() {
-    var repeat = Math.round(Math.random());
+    var repeat = Math.round(Math.random() + 0.2);
     new TimelineMax({repeat:repeat})
       .to('#ludolf_eyebrow_right', 0.1, {y:0, x:-5, rotation:10, transformOrigin: '100% 0%'})
       .to('#ludolf_eyebrow_right', 0.3, {y:0, x:0, rotation:0});
