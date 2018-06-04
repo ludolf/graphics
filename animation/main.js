@@ -67,7 +67,7 @@ function live() {
     
   function bottom() {
     var color1 = '#ffe599';
-    var color2 = '#ffd399';
+    var color2 = '#efe399';
     
     function changeColor1() {
       TweenMax.to('#ludolf_bottom3', 0.2, {fill:color1});
@@ -103,7 +103,7 @@ function live() {
   (function _live() {
       var next = Math.floor(Math.random() * motions.length);
       motions[next]();      
-      setTimeout(_live, Math.floor((Math.random() * 5) + 2) * 1000);  
+      setTimeout(_live, Math.floor((Math.random() * 5) + 2) * 1000);
   })();        
 }
 
