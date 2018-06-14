@@ -1,9 +1,16 @@
+const origWidth = 322;
+const origHeight = 372;
+
+const ratio = document.getElementById('ludolf_ludolf').width.baseVal.value / origWidth;
+
+TweenMax.set('#ludolf_robot', {scaleY:ratio, scaleX:ratio});
+
 const black = '#434343';
 const blink = '#00ff00';
 
 function rightHandUp() {
-  TweenMax.to('#ludolf_arm_right', 1, {scaleY:-1, y:50});
-  TweenMax.to('#ludolf_hand_right', 1, {y:-200});
+  TweenMax.to('#ludolf_arm_right', 1, {scaleY:-1, y:50*ratio});
+  TweenMax.to('#ludolf_hand_right', 1, {y:-200*ratio});
 }
 
 function rightHandDown() {
@@ -12,8 +19,8 @@ function rightHandDown() {
 }
 
 function leftHandUp() {
-  TweenMax.to('#ludolf_arm_left', 1, {scaleY:-1, y:50});
-  TweenMax.to('#ludolf_hand_left', 1, {y:-200});
+  TweenMax.to('#ludolf_arm_left', 1, {scaleY:-1, y:50*ratio});
+  TweenMax.to('#ludolf_hand_left', 1, {y:-200*ratio});
 }
 
 function leftHandDown() {
@@ -22,7 +29,7 @@ function leftHandDown() {
 }
 
 function rightLegUp() {
-  TweenMax.to('#ludolf_leg_right', 1, {y:-15});  
+  TweenMax.to('#ludolf_leg_right', 1, {y:-15*ratio});  
 }
 
 function rightLegDown() {
@@ -30,7 +37,7 @@ function rightLegDown() {
 }
 
 function leftLegUp() {
-  TweenMax.to('#ludolf_leg_left', 1, {y:-15});  
+  TweenMax.to('#ludolf_leg_left', 1, {y:-15*ratio});  
 }
 
 function leftLegDown() {
@@ -52,16 +59,16 @@ function live() {
   function eyebrow() {
     var repeat = Math.round(Math.random() + 0.2);
     new TimelineMax({repeat:repeat})
-      .to('#ludolf_eyebrow_right', 0.1, {y:0, x:-5, rotation:10, transformOrigin: '100% 0%'})
+      .to('#ludolf_eyebrow_right', 0.1, {y:0, x:-5*ratio, rotation:10, transformOrigin: '100% 0%'})
       .to('#ludolf_eyebrow_right', 0.3, {y:0, x:0, rotation:0});
     new TimelineMax({repeat:repeat})
-      .to('#ludolf_eyebrow_left', 0.1, {y:0, x:5, rotation:-10, transformOrigin: '0% 100%'})
+      .to('#ludolf_eyebrow_left', 0.1, {y:0, x:5*ratio, rotation:-10, transformOrigin: '0% 100%'})
       .to('#ludolf_eyebrow_left', 0.3, {y:0, x:0, rotation:0});    
   }
   
   function nose() {
     new TimelineMax()
-      .to('#ludolf_nose', 0.2, {y:-5})
+      .to('#ludolf_nose', 0.2, {y:-5*ratio})
       .to('#ludolf_nose', 0.1, {y:0});
   }      
     
@@ -114,13 +121,13 @@ function live() {
 
   function body() {
     new TimelineMax()
-      .to('#ludolf_body', 0.5, {y:-2, rotation:1, transformOrigin: '50% 100%'})
-      .to('#ludolf_body', 0.5, {y:-2, rotation:-1, transformOrigin: '50% 100%'})
+      .to('#ludolf_body', 0.5, {y:-2*ratio, rotation:1, transformOrigin: '50% 100%'})
+      .to('#ludolf_body', 0.5, {y:-2*ratio, rotation:-1, transformOrigin: '50% 100%'})
       .to('#ludolf_body', 0.5, {y:0, rotation:0});   
   }
   
   var motions = [body, eyelight, nose, eyebrow, eyebrow];
-  
+    
   (function _live() {
       var next = Math.floor(Math.random() * motions.length);
       motions[next]();      
