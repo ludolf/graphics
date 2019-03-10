@@ -15,24 +15,28 @@ var createScene = function(engine, canvas) {
 
     // Materials and colors
 
-    var blue = new BABYLON.SimpleMaterial("blue", scene);
+    var blue = new BABYLON.CellMaterial("blue", scene);
     blue.alpha = 1.0;
+    blue.emissiveColor = new BABYLON.Color3(57 / 255, 162 / 255, 198 / 255);
     blue.diffuseColor = new BABYLON.Color3(57 / 255, 162 / 255, 198 / 255);
-
-    var steel = new BABYLON.SimpleMaterial("steel", scene);
+        
+    var steel = new BABYLON.CellMaterial("steel", scene);
     steel.alpha = 1.0;
+    steel.emissiveColor = new BABYLON.Color3(159 / 255, 197 / 255, 232 / 255);
     steel.diffuseColor = new BABYLON.Color3(159 / 255, 197 / 255, 232 / 255);
 
     var white = new BABYLON.CellMaterial("white", scene);
     white.alpha = 1.0;
+    white.emissiveColor = new BABYLON.Color3(1, 1, 1);
     white.diffuseColor = new BABYLON.Color3(1, 1, 1);
 
     var black = new BABYLON.CellMaterial("black", scene);
     black.alpha = 1.0;
     black.diffuseColor = new BABYLON.Color3(67 / 255, 67 / 255, 67 / 255);
 
-    var eyeBlue = new BABYLON.StandardMaterial("eyeBlue", scene);
+    var eyeBlue = new BABYLON.CellMaterial("eyeBlue", scene);
     eyeBlue.alpha = 1.0;
+    eyeBlue.diffuseColor = new BABYLON.Color3(109 / 255, 158 / 255, 235 / 255);
     eyeBlue.diffuseColor = new BABYLON.Color3(109 / 255, 158 / 255, 235 / 255);
 
     var eyeBlack = new BABYLON.StandardMaterial("eyeBlack", scene);
@@ -237,7 +241,7 @@ var createScene = function(engine, canvas) {
 
     body(scene, blue);
 
-    plate(scene, black);
+    plate(scene);
 
     return scene;
 };
@@ -338,17 +342,22 @@ function body(scene, blue) {
     backYBottomPlate.material = blue;
 }
 
-function plate(scene, black_) {
-    var black = new BABYLON.StandardMaterial("plateBlack", scene);
+function plate(scene) {
+    var black = new BABYLON.CellMaterial("plateBlack", scene);
     black.alpha = 1.0;
+    black.emissiveColor = new BABYLON.Color3(40 / 255, 40 / 255, 40 / 255);
     black.diffuseColor = new BABYLON.Color3(40 / 255, 40 / 255, 40 / 255);
 
-    var yellow = new BABYLON.StandardMaterial("plateYellow", scene);
+    var yellow = new BABYLON.CellMaterial("plateYellow", scene);
     yellow.alpha = 1.0;
+    yellow.emissiveColor = new BABYLON.Color3(255 / 255, 229 / 255, 153 / 255);
     yellow.diffuseColor = new BABYLON.Color3(255 / 255, 229 / 255, 153 / 255);
-
-    var red = new BABYLON.StandardMaterial("plateRed", scene);
+    yellow.specularColor = new BABYLON.Color3(255 / 255, 229 / 255, 153 / 255);
+    yellow.ambientColor = new BABYLON.Color3(255 / 255, 229 / 255, 153 / 255);
+    
+    var red = new BABYLON.CellMaterial("plateRed", scene);
     red.alpha = 1.0;
+    red.emissiveColor = new BABYLON.Color3(204 / 255, 88 / 255, 88 / 255);
     red.diffuseColor = new BABYLON.Color3(204 / 255, 88 / 255, 88 / 255);
 
     var mainTableDiscTL = BABYLON.MeshBuilder.CreateDisc("mainTableDiscTL", {
@@ -385,8 +394,7 @@ function plate(scene, black_) {
         height: 0.12, width: 0.445, sideOrientation: BABYLON.Mesh.DOUBLESIDE
     }, scene);
     mainTableY.position = new BABYLON.Vector3(0, -0.01, 0.2626); 
-    mainTableY.material = black;
-
+    mainTableY.material = black; 
 
     var leftTable = BABYLON.MeshBuilder.CreatePlane("leftTable", {
         height: 0.05, width: 0.25, sideOrientation: BABYLON.Mesh.DOUBLESIDE
@@ -420,22 +428,20 @@ function plate(scene, black_) {
     triangleButton.position = new BABYLON.Vector3(0.1, 0.071, 0.2626); 
     triangleButton.material = yellow;
 
-
     var logoPlane = BABYLON.MeshBuilder.CreatePlane("logoPlane", {
         height: 0.07, width: 0.08, sideOrientation: BABYLON.Mesh.DOUBLESIDE
     }, scene);
     logoPlane.rotate(BABYLON.Axis.Y, Math.PI, BABYLON.Space.LOCAL);
     logoPlane.position = new BABYLON.Vector3(-0.17, 0.1, 0.2626); 
 
-	var logoTexture = new BABYLON.DynamicTexture("logoTexture", {
-        width: 256, height: 190
-    }, scene); 
+  	var logoTexture = new BABYLON.DynamicTexture("logoTexture", {
+          width: 256, height: 190
+      }, scene); 
+  	
+  	var logoMaterial = new BABYLON.CellMaterial("logoMaterial", scene);    				
+  	logoMaterial.diffuseTexture = logoTexture;  
+  	logoPlane.material = logoMaterial;
 	
-	var logoMaterial = new BABYLON.SimpleMaterial("logoMaterial", scene);    				
-	logoMaterial.diffuseTexture = logoTexture;
-	logoPlane.material = logoMaterial;
-	
-    //Add text to dynamic texture
     var font = "bold 376px georgia";
-    logoTexture.drawText("π", 0, 190, font, "#434343", "#39a2c6", true, true);
+    logoTexture.drawText("π", 0, 190, font, "#434343", "#3fb4dc", true, true);
 }
